@@ -52,7 +52,7 @@
         }
 
         input::placeholder {
-            color: #fff; /* Set the placeholder text color to white */
+            color: #fff;
         }
 
         button {
@@ -126,6 +126,8 @@
             const question = questions[currentQuestion];
             document.getElementById("question").textContent = question.question;
             document.getElementById("answer").value = '';
+            document.getElementById("answer").style.borderColor = '';  // Reset input border color
+            document.getElementById("result").textContent = '';  // Clear previous result
         }
 
         function checkAnswer() {
@@ -133,6 +135,7 @@
             const correctAnswer = questions[currentQuestion].answer.toLowerCase();
             const quizContainer = document.getElementById('quiz-container');
             const body = document.body;
+            const inputField = document.getElementById('answer');
 
             if (answer === correctAnswer) {
                 body.style.backgroundColor = "green";
@@ -144,14 +147,13 @@
                 remaining--;
                 document.getElementById("result").textContent = "Përgjigje e saktë!";
             } else {
-                quizContainer.style.animation = "shake 0.5s ease";
+                inputField.style.borderColor = "red";  // Change input border to red
+
                 body.style.backgroundColor = "red";
                 setTimeout(() => {
-                    quizContainer.style.animation = "";
-                    body.style.backgroundColor = "#1e2a47";
+                    body.style.backgroundColor = "#1e2a47";  // Reset background color
+                    inputField.style.borderColor = '';  // Reset input border color
                 }, 1000);
-
-                document.getElementById("result").textContent = "Përgjigje gabim!";
             }
 
             currentQuestion++;
