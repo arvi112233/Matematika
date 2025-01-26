@@ -141,6 +141,7 @@
             const correctAnswer = questions[currentQuestion].answer.toLowerCase();
             const body = document.body;
             const inputField = document.getElementById('answer');
+            const submitButton = document.getElementById('submit');
 
             if (answer === correctAnswer) {
                 body.style.backgroundColor = "green";
@@ -159,19 +160,27 @@
                     body.style.backgroundColor = "#1e2a47";  // Reset background color
                     inputField.style.borderColor = '';  // Reset input border color
                 }, 1000);
+                document.getElementById("result").textContent = "Përgjigje gabim!";
             }
 
             currentQuestion++;
             if (currentQuestion < questions.length) {
-                loadQuestion();
+                setTimeout(() => {
+                    loadQuestion();
+                    submitButton.disabled = false;  // Enable button for the next question
+                }, 1000);  // Wait for animation to finish before showing next question
             } else {
                 document.getElementById("result").textContent = `Kuizi ka përfunduar! Ju keni përgjigjur saktë ${completed} nga ${questions.length} pyetje.`;
+                submitButton.disabled = true;  // Disable button when quiz ends
             }
 
             updateProgress();
         }
 
-        document.getElementById("submit").addEventListener("click", checkAnswer);
+        document.getElementById("submit").addEventListener("click", function() {
+            document.getElementById("submit").disabled = true;  // Disable button while processing answer
+            checkAnswer();
+        });
 
         loadQuestion();
     </script>
