@@ -22,6 +22,7 @@
             align-items: center;
             padding: 20px;
             text-align: center;
+            transition: background-color 1s ease;
         }
 
         h1 {
@@ -40,6 +41,10 @@
             backdrop-filter: blur(10px);
         }
 
+        .question-box {
+            margin-bottom: 20px; /* Added space between question and input */
+        }
+
         input {
             font-size: 1rem;
             padding: 10px;
@@ -49,6 +54,7 @@
             margin-bottom: 20px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
+            transition: border-color 0.3s ease;
         }
 
         input::placeholder {
@@ -133,7 +139,6 @@
         function checkAnswer() {
             const answer = document.getElementById("answer").value.toLowerCase();
             const correctAnswer = questions[currentQuestion].answer.toLowerCase();
-            const quizContainer = document.getElementById('quiz-container');
             const body = document.body;
             const inputField = document.getElementById('answer');
 
